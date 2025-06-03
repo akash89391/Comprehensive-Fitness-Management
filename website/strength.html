@@ -1,0 +1,75 @@
+{% extends 'website/basic.html' %}
+
+
+{% block title%} Strength||levels {% endblock %}
+
+{% block css %} 
+{% load static %}
+
+body{
+    background-image:url({% static 'front/images/mans.jpg' %});
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+    background-attachment:fixed;
+    }
+.section1{
+    margin:50px;
+    padding:15px;
+    background-color:white;
+    border-radius:10px;
+  
+}
+.ex{
+    margin:50px;
+    padding:15px;
+    background-color:white;
+    border-radius:10px;
+.section{
+    display:grid;
+    grid-template-columns:auto auto auto auto;
+    padding:10px;
+    gap:10px;
+}
+.one{
+    border:1px solid black;
+    padding:20px;
+    text-aling:center;
+    border-radius:10px;
+}
+.one,a{
+    text-decoration:none;
+}
+.one,h4,p{
+    color:black;
+    background-color:LightGray;
+}
+}
+{% endblock %}
+{% block homeurl %} "\"{% endblock %}
+{% block abouturl %} "\about/" {% endblock %}
+{% block contacturl %} "\contact/" {% endblock %}
+{% block mealurl %} "\decider" {% endblock %}
+{% block orderurl %} "\order/" {% endblock %}
+
+
+{% block body %}
+<div class="back">
+    <div class="section1">
+        <h1 class="title">Weightlifting Strength Standards</h1>
+        <p>The strength standards on this page grade your one-rep max performance against other adult lifters at your bodyweight.</p>
+        <p>Our strength standards are based on millions of lifts entered by Strength Level users.</p>
+    </div>
+    <div class="ex">
+        <h3>By Exercise</h3>
+        <hr>
+    <div class="section">
+        {% for i in strength%}
+        <div class="one"> 
+            <a href="{% url 'calcuation' i.id %}"><img src={{i.image.url}} style="width:70px;heigth:70px;" alt=""><h4>{{i.name}}</h4><p>36,689,513 lifts</p></a>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+
+</div>
+{% endblock %}

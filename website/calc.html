@@ -1,0 +1,97 @@
+{% extends 'website/basic.html' %}
+
+
+{% block title%} Strength||levels {% endblock %}
+
+{% block css %} 
+{% load static %}
+
+
+    body{
+        background-image:url({% static 'front/images/mans.jpg' %});
+        background-repeat: no-repeat;
+        background-size: 100vw 100vh;
+        background-attachment:fixed;
+        }
+.c{
+    background-color:white;
+    color:black;
+    margin:50px;
+    padding:15px;
+}
+.input{
+    width:70%;
+    height:40px;
+    margin-top:20px;
+    border-radius:5px;
+    border:1px solid black;
+}
+button{
+    margin-top:10px;
+    padding:8px 20px;
+    border-radius:5px;
+    background-color:black;
+    color:white;
+}
+img{
+    width:300px;
+    heigth:300px
+}
+.c{
+    display:flex;
+    border-radius:10px;
+}
+.two{
+    margin-top:140px;
+}
+{% endblock %}
+{% block homeurl %} "\"{% endblock %}
+{% block abouturl %} "\about/" {% endblock %}
+{% block contacturl %} "\contact/" {% endblock %}
+{% block mealurl %} "\decider" {% endblock %}
+{% block orderurl %} "\order/" {% endblock %}
+
+{% block body %}
+
+<div class="c">
+    <div class="one">
+        <h1 style="font-weight: bolder;">{{strength.name}} Standards</h1>
+        <h2>Measured in kg</h2>
+        <p>{{strength.name}} strength standards help you to compare your one-rep max lift with other lifters at your bodyweight.</p>
+        <p style="font-weight: bold;">Exercise</p>
+        <h3>Calculate Your Strength Level</h3>
+        {% if typ %}
+       <h1> Your Strength Level for {{strength.name}} in {{typ}} </h1>
+       <p>We estimate that your one-rep max is {{one|floatformat:1}}</p>
+      
+       
+    {% if one <= 25 %}
+       <span style="color: rgb(195, 195, 19); width: 200px; height: 300px; font-size: 80px;">★</span>
+   {% elif one <= 45 %}
+   <span style="color: rgb(195, 195, 19); width: 200px; height: 300px; font-size: 80px;">★★</span>
+   {% elif one <= 65 %}
+   <span style="color: rgb(195, 195, 19); width: 200px; height: 300px; font-size: 80px;">★★★</span>
+   {% elif one <= 75 %}
+   <span style="color: rgb(195, 195, 19); width: 200px; height: 300px; font-size: 80px;">★★★★</span>
+   {% else %}
+   <span style="color: rgb(195, 195, 19); width: 200px; height: 300px; font-size: 80px;">★★★★★</span>
+   {% endif %}
+   
+{% else%}
+        <form action="" method="post">
+            {% csrf_token %}
+            <input name="weight" type="number" class="input" placeholder="Bodyweight in kg">
+            <input name="lift" type="number" class="input" placeholder="Lift weight in kg">
+            <input name="reps" type="number" class="input" placeholder="Number of Reps">
+            <input name="age" type="number" class="input" placeholder="Age in Years old">
+            <br>
+            <button>calculate Level</button>
+        </form>
+        {% endif %}
+    </div>
+    <div class="two">
+        <img src="{{strength.image.url}}" alt="">
+    </div>
+</div>
+
+{% endblock %}
